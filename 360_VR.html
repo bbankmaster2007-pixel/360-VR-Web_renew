@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Frame 360 Tour</title>
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+</head>
+
+<body>
+    <a-scene execution-mode="async">
+        <!--======================================================- Assets -===========================================================-->
+
+        <a-assets>
+            <!-- F1 -->
+            <img id="loc1A1" src="Buildingname/Name/Floor(1)/picF1A1.jpg" rotation="0 90 0" crossorigin="anonymous">
+            <img id="loc1A2" src="Buildingname/Name/Floor(1)/picF1A2.jpg" crossorigin="anonymous">
+            <img id="loc1A-1" src="Buildingname/Name/Floor(1)/picF1A-1.jpg" crossorigin="anonymous">
+            <img id="loc1B1" src="Buildingname/Name/Floor(1)/picF1B1.jpg" crossorigin="anonymous">
+            <img id="loc1C1" src="Buildingname/Name/Floor(1)/picF1C1.jpg" crossorigin="anonymous">
+            <img id="locSt1" src="Buildingname/Name/Floor(1)/picF1Sta.jpg" crossorigin="anonymous">
+
+            <!-- F2 -->
+            <img id="loc2A1" src="Buildingname/Name/Floor(2)/picF2A1.jpg" crossorigin="anonymous">
+            <img id="loc2A2" src="Buildingname/Name/Floor(2)/picF2A2.jpg" crossorigin="anonymous">
+            <img id="loc2A-1" src="Buildingname/Name/Floor(2)/picF2A-1.jpg" crossorigin="anonymous">
+            <img id="loc2B1" src="Buildingname/Name/Floor(2)/picF2B1.jpg" crossorigin="anonymous">
+            <img id="loc2C1" src="Buildingname/Name/Floor(2)/picF2C1.jpg" crossorigin="anonymous">
+
+        </a-assets>
+
+        <!--==================================================- Player controls -======================================================-->
+        <!--===================================================- And viewpoint -=======================================================-->
+
+        <!-- Camera Rig: Position locked -->
+        <a-entity id="rig" position="0 1.6 0">
+            <!-- wasd-controls-enabled="false": Disables WASD / Arrow key movement
+          pointerLockEnabled: false: Prevents lock-walking -->
+            <a-camera id="camera"
+                look-controls="touchEnabled: true; magicWindowControlsEnabled: true; wasd-controls-enabled: false;"
+                wasd-controls="enabled: false">
+
+                <!-- Inverting Ring Cursor -->
+                <a-entity id="cursor" cursor="fuse: false" raycaster="objects: .clickable" position="0 0 -1"
+                    geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" invert-shader>
+                </a-entity>
+
+                <!-- Fade Overlay -->
+                <a-sphere id="fade-overlay" radius="0.05" position="0 0 0"
+                    material="color: #000000; side: double; transparent: true; opacity: 0"
+                    animation__fadeout="property: material.opacity; from: 0; to: 1; dur: 400; startEvents: fade-out"
+                    animation__fadein="property: material.opacity; from: 1; to: 0; dur: 400; startEvents: fade-in">
+                </a-sphere>
+            </a-camera>
+        </a-entity>
+
+        <a-sky id="sky" src="#loc1A1" rotation="0 90 0"></a-sky>
+
+        <!--===================================================== Teleportation =======================================================-->
+        <a-entity id="TP" position="0 0 0">
+            <!-- F1 -->
+            <!-- 1A1 -->
+            <a-entity id="1A1" visible="true" position="0 0 0">
+                <a-entity id="to_1B1" position="0 0 -4" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1A1; show: #1B1; imageSrc: #loc1B1; imgRotate:0 192 0; moveDirection: 0 0 15; moveDur: 500">
+                    <a-triangle position="0 -0.2 0.01" rotation="90 0 0" vertex-a="-0.2 0 0" vertex-b="0 0 -0.5"
+                        vertex-c="0.2 0 0" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+                <a-entity id="to_1A2" position="4 0 0" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1A1; show: #1A2; imageSrc: #loc1A2; imgRotate:0 0 0; moveDirection: -15 0 0; moveDur: 500">
+                    <a-triangle position="-0.2 0 0.01" rotation="90 0 0" vertex-a="0 0 -0.2" vertex-b="0.5 0 0"
+                        vertex-c="0 0 0.2" color="red" side="back"></a-triangle>
+                </a-entity>
+
+                <a-entity id="to_1A-1" position="-4 0 0" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1A1; show: #1A-1; imageSrc: #loc1A-1; imgRotate:0 180 0; moveDirection: 15 0 0; moveDur: 500">
+                    <a-triangle position="0.2 0 0.01" rotation="90 0 0" vertex-a="0 0 0.2" vertex-b="-0.5 0 0"
+                        vertex-c="0 0 -0.2" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+                <a-entity id="to_St1" position="3 2 -3" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="0 -45 0" class="clickable"
+                    gogo="hide: #1A1; show: #St1; imageSrc: #locSt1; imgRotate:0 90 0; moveDirection: -15 -15 15; moveDur: 500">
+                    <a-triangle position="0 0.2 0.01" rotation="90 0 0" vertex-a="0.2 0 0" vertex-b="0 0 0.5"
+                        vertex-c="-0.2 0 0" color="red" side="back"></a-triangle>
+                </a-entity>
+            </a-entity>
+            <!-- 1B1 -->
+            <a-entity id="1B1" visible="false" position="0 0 -15">
+                <a-entity id="to_1C1" position="0 0 -4" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1B1; show: #1C1; imageSrc: #loc1C1; imgRotate:0 190 0; moveDirection: 0 0 30; moveDur: 500">
+                    <a-triangle position="0 -0.2 0.01" rotation="90 0 0" vertex-a="-0.2 0 0" vertex-b="0 0 -0.5"
+                        vertex-c="0.2 0 0" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+                <a-entity id="to_St1" position="4 0 0" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1B1; show: #St1; imageSrc: #locSt1; imgRotate:0 90 0; moveDirection: -15 -15 15; moveDur: 500">
+                    <a-triangle position="-0.2 0 0.01" rotation="90 0 0" vertex-a="0 0 -0.2" vertex-b="0.5 0 0"
+                        vertex-c="0 0 0.2" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+                <a-entity id="to_1A1" position="0 0 4" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1B1; show: #1A1; imageSrc: #loc1A1; imgRotate:0 90 0; moveDirection: 0 0 0; moveDur: 500">
+                    <a-triangle position="0 0.2 0.01" rotation="90 0 0" vertex-a="0.2 0 0" vertex-b="0 0 0.5"
+                        vertex-c="-0.2 0 0" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+            </a-entity>
+            <!-- 1C1 -->
+            <a-entity id="1C1" visible="false" position="0 0 -30">
+                <a-entity id="to_1B1" position="0 0 4" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1C1; show: #1B1; imageSrc: #loc1B1; imgRotate:0 190 0; moveDirection: 0 0 15; moveDur: 500">
+                    <a-triangle position="0 0.2 0.01" rotation="90 0 0" vertex-a="0.2 0 0" vertex-b="0 0 0.5"
+                        vertex-c="-0.2 0 0" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+            </a-entity>
+            <!-- 1A2 -->
+            <a-entity id="1A2" visible="false" position="15 0 0">
+                <a-entity id="to_1A1" position="-4 0 0" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1A2; show: #1A1; imageSrc: #loc1A1; imgRotate:0 90 0; moveDirection: 0 0 0; moveDur: 500">
+                    <a-triangle position="0.2 0 0.01" rotation="90 0 0" vertex-a="0 0 0.2" vertex-b="-0.5 0 0"
+                        vertex-c="0 0 -0.2" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+            </a-entity>
+            <!-- 1A-1 -->
+            <a-entity id="1A-1" visible="false" position="-15 0 0">
+                <a-entity id="to_1A1" position="4 0 0" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="-90 0 0" class="clickable"
+                    gogo="hide: #1A-1; show: #1A1; imageSrc: #loc1A1; imgRotate:0 90 0; moveDirection: 0 0 0; moveDur: 500">
+                    <a-triangle position="-0.2 0 0.01" rotation="90 0 0" vertex-a="0 0 -0.2" vertex-b="0.5 0 0"
+                        vertex-c="0 0 0.2" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+            </a-entity>
+            <!-- St1 -->
+            <a-entity id="St1" visible="false" position="15 16 -15">
+                <a-entity id="to_2A2" position="0 0 4" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="180 0 0" class="clickable"
+                    gogo="hide: #St1; imageSrc: #loc1A1; imgRotate:0 90 0; show: #1A1; moveDirection: 0 0 0; moveDur: 500"
+                    open-url="url: https://youtu.be/dQw4w9WgXcQ?si=rY29nswrmUZz-69w">
+                    <a-triangle position="0 0.2 0.01" rotation="90 0 0" vertex-a="0.2 0 0" vertex-b="0 0 0.5"
+                        vertex-c="-0.2 0 0" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+                <a-entity id="to_1B1" position="-4 0 0" geometry="primitive: circle; radius: 0.5"
+                    material="visible: true" rotation="180 -90 0" class="clickable"
+                    gogo="hide: #St1; show: #1B1; imageSrc: #loc1B1; imgRotate:0 192 0; moveDirection:0 0 15; moveDur: 500">
+                    <a-triangle position="0 -0.2 0.01" rotation="90 0 0" vertex-a="-0.2 0 0" vertex-b="0 0 -0.5"
+                        vertex-c="0.2 0 0" color="red" side="back"></a-triangle>
+                </a-entity>
+                <!--------------->
+            </a-entity>
+
+        </a-entity>
+
+        <!--===========================================================================================================================-->
+
+        <a-entity id="blockArrow">
+            <a-sphere class="clickable" rotation="0 0 0" radius="6" position="0 1 0" side="back"
+                material="visible: false"></a-sphere>
+        </a-entity>
+
+        <!--=========================================================- Map -==========================================================
+
+        <a-box id="map" class="clickable" position="0 1.90 -5" width="2" height="0.2" depth="2" rotation="0 40 0"
+            color="#7d3bf7"></a-box>
+        <a-box id="map" class="clickable" position="0 2.4 -5" width="2" height="0.2" depth="2" rotation="0 40 0"
+            color="#36b1ba"></a-box>
+        </a-box>
+
+        ===============================================- canceled -================================================================-->
+    </a-scene>
+
+    <script src="JS/Name.js"></script>
+</body>
+
+</html>
