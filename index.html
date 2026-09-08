@@ -40,12 +40,7 @@
           pointerLockEnabled: false: Prevents lock-walking -->
             <a-camera id="camera"
                 look-controls="touchEnabled: true; magicWindowControlsEnabled: true; wasd-controls-enabled: false;"
-                wasd-controls="enabled: false">
-
-                <!-- Inverting Ring Cursor -->
-                <a-entity id="cursor" cursor="fuse: false" raycaster="objects: .clickable" position="0 0 -1"
-                    geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" invert-shader>
-                </a-entity>
+                wasd-controls="enabled: false" cursor="rayOrigin: mouse" raycaster="objects: .clickable">
 
                 <!-- Fade Overlay -->
                 <a-sphere id="fade-overlay" radius="0.05" position="0 0 0"
